@@ -1,0 +1,19 @@
+<html>
+    <head>
+        <title>Snack Guild</title>
+    </head>
+    <body>
+        <div>
+            <h1><a href="">Snack Guild Market</a></h1>
+        </div>
+        {% for trade in trades %}
+            <div>
+                <p>Trader: {{ trade.trader }}</p>
+                <p>Posted: {{ trade.post_date }}</p>
+                <h1><a href="">{{ trade.snack }}</a></h1>
+                <p>Want to {{ trade.trade_type }}</p>
+                <p>{{ trade.snack }}</p>
+            </div>
+        {% endfor %}
+    </body>
+</html>
