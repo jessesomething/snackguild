@@ -1,46 +1,37 @@
+{% extends 'market/base.html' %}
 {% load staticfiles %}
 <html>
-<head>
-    <title>Snack Wash</title>
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="{% static 'css/market.css' %}">
-    <link href="http://fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-</head>
-<body>
-    <div class="page-header">
-        <h1><a href="">Snack Wash</a></h1>
-    </div>
-    <div class="content container">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Posted</th>
-                    <th>Exchange Type</th>
-                    <th>Snack</th>
-                    <th>Type</th>
-                    <th>Trader</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for trade in trades %}
-                <tr>
-                    <div class="date">
-                        <th><p>{{ trade.post_date }}</p></th>
-                    </div>
-                    <th><p>Want to {{ trade.trade_type }}</p></th>
-                    <th><p><a href="{% url 'trade_detail' pk=trade.pk %}">{{ trade.snack }}</p></h1></th>
-                        <th><p>{{ trade.snack_type }}</p></h1></th>
-                        <th><p>{{ trade.trader }}</p></th>
-                    </tr>
-                </div>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
-</div>
-</div
-</body>
+<table class="table">
+
+    <thead>
+        <tr>
+            <th>Posted</th>
+            <th>Exchange Type</th>
+            <th>Snack</th>
+            <th>Type</th>
+            <th>Country</th>
+            <th>Trader</th>
+        </tr>
+    </thead>
+
+{% block content %}
+    <tbody>
+        {% for trade in trades %}
+        <tr>
+            <div class="date">
+                <th><p>{{ trade.post_date }}</p></th>
+            </div>
+            <th><p>Want to {{ trade.trade_type }}</p></th>
+            <th><p><a href="{% url 'trade_detail' pk=trade.pk %}">{{ trade.snack }}</p></h1></th>
+                <th><p>{{ trade.snack_type }}</p></th>
+                <th><p>{{ trade.country }}</p></th>
+                <th><p>{{ trade.state }}</p></th>
+                <th><p>{{ trade.trader }}</p></th>
+                <th><a href="{% url 'trade_detail' pk=trade.pk %}" class="content"><span class="glyphicon glyphicon-plus"></span></a></th>
+            </tr>
+        </div>
+        {% endfor %}
+    </tbody>
+    {% endblock %}
+</table>
 </html>

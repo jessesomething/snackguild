@@ -34,7 +34,7 @@ h1, h2, h3, h4 {
     float: right;
 }
 
-.market-form textarea, .market-form input {
+.trade-form textarea, .trade-form input {
     width: 100%;
 }
 

@@ -2,12 +2,14 @@ from django.db import models
 from django.utils import timezone
 
 class Market(models.Model):
-    trader = models.ForeignKey('auth.User')
-    snack = models.CharField(max_length=200)
-    trade_type = models.CharField(max_length=200)
-    snack_type = models.CharField(max_length=200)
     post_date = models.DateTimeField(
         default=timezone.now)
+    trade_type = models.CharField(max_length=200)
+    snack = models.CharField(max_length=200)
+    snack_type = models.CharField(max_length=200)
+    country = models.CharField(max_length=200, default="United States")
+    state = models.CharField(max_length=200, default="")
+    trader = models.ForeignKey('auth.User')
 
     def post(self):
         self.post_date = timezone.now()
