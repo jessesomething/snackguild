@@ -1,42 +1,42 @@
 {% extends 'market/base.html' %}
 {% load staticfiles %}
 <html>
-<table class="table">
-
-  <thead>
-    <tr>
-      <th>Posted</th>
-      <th>Exchange Type</th>
-      <th>Snack</th>
-      <th>Type</th>
-      <th>Country</th>
-      <th>Trader</th>
-    </tr>
-  </thead>
 
   {% block content %}
-  <tbody>
-    {% for trade in trades %}
-    <tr>
-      <div class="date">
-        <th><p>{{ trade.post_date }}</p></th>
-      </div>
-      <th><p>Want to {{ trade.trade_type }}</p></th>
-      <th><p><a href="{% url 'trade_detail' pk=trade.pk %}">{{ trade.snack }}</a></p></h1></th>
-      <th><p>{{ trade.snack_type }}</p></th>
-      <th><p>{{ trade.country }}</p></th>
-      <th><p>{{ trade.state }}</p></th>
-      <th><p><a href="{% url 'trader_list' fk=trade.trader %}">{{ trade.trader }}</a></p></th>
-      {% if user.is_authenticated and user != trade.trader %}
-      <th><a href="{% url 'trade' fk=trade.trader %}" class="content"><span class="glyphicon glyphicon-plus"></span></a></th>
-      {% endif %}
-      {% if user.is_authenticated and user = trade.trader %}
-      <th><a href="" class="content"><span class="glyphicon glyphicon-minus"></span></a></th>
-      {% endif %}
-    </tr>
-  </div>
-  {% endfor %}
-</tbody>
-{% endblock %}
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Posted</th>
+        <th>Exchange Type</th>
+        <th>Snack</th>
+        <th>Type</th>
+        <th>Country</th>
+        <th>State</th>
+        <th>Trader</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for trade in trades %}
+      <tr>
+        <div class="date">
+          <th><p>{{ trade.post_date }}</p></th>
+        </div>
+        <th><p>Want to {{ trade.trade_type }}</p></th>
+        <th><p><a href="{% url 'trade_detail' pk=trade.pk %}">{{ trade.snack }}</a></p></h1></th>
+        <th><p>{{ trade.snack_type }}</p></th>
+        <th><p>{{ trade.country }}</p></th>
+        <th><p>{{ trade.state }}</p></th>
+        <th><p><a href="{% url 'trader_list' fk=trade.trader %}">{{ trade.trader }}</a></p></th>
+        {% if user.is_authenticated and user != trade.trader %}
+        <th><a href="{% url 'trade' fk=trade.trader %}" class="content"><span class="glyphicon glyphicon-plus"></span></a></th>
+        {% endif %}
+        {% if user.is_authenticated and user = trade.trader %}
+        <th><a href="" class="content"><span class="glyphicon glyphicon-minus"></span></a></th>
+        {% endif %}
+      </tr>
+    </div>
+    {% endfor %}
+  </tbody>
+  {% endblock %}
 </table>
 </html>
