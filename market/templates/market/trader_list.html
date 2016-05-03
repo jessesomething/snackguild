@@ -1,0 +1,23 @@
+{% extends 'market/base.html' %}
+{% block content %}
+{% for trader in traders %}
+<tbody>
+  <tr>
+    <div class="date">
+      <th><p>{{ trader.post_date }}</p></th>
+    </div>
+    <th><p>Want to {{ trader.trade_type }}</p></th>
+    <th><p>{{ trader.snack }}</p></h1></th>
+    <th><p>{{ trader.snack_type }}</p></th>
+    <th><p>{{ trader.country }}</p></th>
+    <th><p>{{ trader.state }}</p></th>
+    <th><p>{{ trader.trader }}</p></th>
+    <!-- Checks if currently logged in user is the displayed trader list -->
+    {% if user.is_authenticated and trader.trader == user %}
+    <th><a href="" class="content"><span class="glyphicon glyphicon-minus"></span></a></th>
+    {% endif %}
+  </tr>
+</div>
+</tbody>
+{% endfor %}
+{% endblock %}
