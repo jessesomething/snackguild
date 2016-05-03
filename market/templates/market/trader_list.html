@@ -1,23 +1,38 @@
 {% extends 'market/base.html' %}
 {% block content %}
+<div class="col-md-8 navbar-right">
+<table class="table table-hover table-condensed">
+  <thead>
+    <tr>
+      <th>Trader</th>
+      <th>Posted</th>
+      <th>Exchange Type</th>
+      <th>Snack</th>
+      <th>Type</th>
+    </tr>
+  </thead>
+
 {% for trader in traders %}
 <tbody>
   <tr>
+    <th><p>{{ trader.trader }}</p></th>
     <div class="date">
       <th><p>{{ trader.post_date }}</p></th>
     </div>
     <th><p>Want to {{ trader.trade_type }}</p></th>
     <th><p>{{ trader.snack }}</p></h1></th>
     <th><p>{{ trader.snack_type }}</p></th>
-    <th><p>{{ trader.country }}</p></th>
-    <th><p>{{ trader.state }}</p></th>
-    <th><p>{{ trader.trader }}</p></th>
     <!-- Checks if currently logged in user is the displayed trader list -->
     {% if user.is_authenticated and trader.trader == user %}
     <th><a href="" class="content"><span class="glyphicon glyphicon-minus"></span></a></th>
     {% endif %}
   </tr>
+  </tbody>
 </div>
-</tbody>
 {% endfor %}
+</table>
+<div class="col-md-2 navbar-left">
+      <p>{{ trader.state }}</p>
+      <p>{{ trader.country }}</p>
+  </div>
 {% endblock %}

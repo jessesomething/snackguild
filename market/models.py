@@ -15,6 +15,9 @@ class Market(models.Model):
         self.post_date = timezone.now()
         self.save()
 
+    def get_trader(self):
+        return self.trader
+
     def __str__(self):
         return self.snack
 
