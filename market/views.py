@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.contrib.auth.models import User
 from django.utils import timezone
-from .models import Market
+from .models import Market, Trade_Cart
 from .forms import TradeForm
 
 
@@ -20,6 +20,9 @@ def trade(request, fk, cu):
     current_user = User.objects.get(username=cu)
     snacks = Market.objects.filter(Q(trader=current_user) | Q(trader=user))
     return render(request, 'market/trade.html', {'snacks' : snacks})
+
+# def trade_cart(request, item, cu):
+#     snack =
 
 
 # def trader_list(request, uk):
@@ -46,6 +49,16 @@ def trade_new(request):
     else:
         form = TradeForm()
     return render(request, 'market/trade_edit.html', {'form' : form})
+
+@login_required
+def update(request, id):
+    snack = Market.objects.get(pk=id)
+    if snack.trading == False:
+        snack.trading = True
+    elif snack.trading == True:
+        snack.trading = False
+    snack.save()
+    return HttpResponse('updated')
 
 @login_required
 def trade_save(request):

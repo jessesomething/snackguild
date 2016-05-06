@@ -12,7 +12,7 @@
     {% for snack in snacks %}
     <tbody>
       <tr>
-        {% if snack.trade_type = 'Trade' and user != snack.trader %}
+        {% if snack.trade_type = 'Trade' and user != snack.trader and snack.trading == False %}
         <th><p>{{ snack.snack }}</p></h1></th>
         <th><p>{{ snack.snack_type }}</p></th>
         <!-- Checks if currently logged in user is the displayed trader list -->
@@ -30,6 +30,7 @@
     <thead>
       <tr>
         <th>Snack</th>
+        <th>Snack_id</th>
         <th>Type</th>
       </tr>
     </thead>
@@ -38,10 +39,61 @@
       <tr>
         {% if snack.trade_type = 'Trade' and user == snack.trader %}
         <th><p>{{ snack.snack }}</p></h1></th>
+        <th><p>{{ snack.id }}</p></h1></th>
         <th><p>{{ snack.snack_type }}</p></th>
         <!-- Checks if currently logged in user is the displayed trader list -->
         {% if user.is_authenticated and snack.trader == user %}
+        <th><a href="" class="content"><button id="{{ snack.id }}" class="glyphicon glyphicon-plus" class="{% url 'update' id=snack.id %}"></button></a></th>
+        {% endif %}
+        {% endif %}
+      </tr>
+    </tbody>
+    {% endfor %}
+  </table>
+</div>
+<div class="col-md-6">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Snack</th>
+        <th>Type</th>
+      </tr>
+    </thead>
+    {% for snack in snacks %}
+    <tbody>
+      <tr>
+        {% if snack.trade_type = 'Trade' and user != snack.trader and snack.trading == True %}
+        <th><p>{{ snack.snack }}</p></h1></th>
+        <th><p>{{ snack.snack_type }}</p></th>
+        <!-- Checks if currently logged in user is the displayed trader list -->
+        {% endif %}
+        {% if user.is_authenticated and user != snack.trader %}
         <th><a href="" class="content"><span class="glyphicon glyphicon-plus"></span></a></th>
+        {% endif %}
+        {% endfor %}
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="col-md-6">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Snack</th>
+        <th>Snack_id</th>
+        <th>Type</th>
+      </tr>
+    </thead>
+    {% for snack in snacks %}
+    <tbody>
+      <tr>
+        {% if snack.trade_type = 'Trade' and user == snack.trader and snack.trading == True %}
+        <th><p>{{ snack.snack }}</p></h1></th>
+        <th><p>{{ snack.id }}</p></h1></th>
+        <th><p>{{ snack.snack_type }}</p></th>
+        <!-- Checks if currently logged in user is the displayed trader list -->
+        {% if user.is_authenticated and snack.trader == user %}
+        <th><a href="" class="content"><button id="{{ snack.id }}" class="glyphicon glyphicon-plus" class="update"></button></a></th>
         {% endif %}
         {% endif %}
       </tr>
