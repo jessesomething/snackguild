@@ -9,16 +9,16 @@
         <th>Type</th>
       </tr>
     </thead>
-    {% for trader in traders %}
+    {% for snack in snacks %}
     <tbody>
       <tr>
-        {% if trader.trade_type = 'Trade' %}
-        <th><p>{{ trader.snack }}</p></h1></th>
-        <th><p>{{ trader.snack_type }}</p></th>
+        {% if snack.trade_type = 'Trade' and user != snack.trader %}
+        <th><p>{{ snack.snack }}</p></h1></th>
+        <th><p>{{ snack.snack_type }}</p></th>
         <!-- Checks if currently logged in user is the displayed trader list -->
-        {% if user.is_authenticated and trader.trader == user %}
-        <th><a href="" class="content"><span class="glyphicon glyphicon-minus"></span></a></th>
         {% endif %}
+        {% if user.is_authenticated and user != snack.trader %}
+        <th><a href="" class="content"><span class="glyphicon glyphicon-plus"></span></a></th>
         {% endif %}
         {% endfor %}
       </tr>
@@ -33,15 +33,15 @@
         <th>Type</th>
       </tr>
     </thead>
-    {% for trader in traders %}
+    {% for snack in snacks %}
     <tbody>
       <tr>
-        {% if user.trade_type = 'Trade' %}
-        <th><p>{{ user.snack }}</p></h1></th>
-        <th><p>{{ user.snack_type }}</p></th>
+        {% if snack.trade_type = 'Trade' and user == snack.trader %}
+        <th><p>{{ snack.snack }}</p></h1></th>
+        <th><p>{{ snack.snack_type }}</p></th>
         <!-- Checks if currently logged in user is the displayed trader list -->
-        {% if user.is_authenticated and trader.trader == user %}
-        <th><a href="" class="content"><span class="glyphicon glyphicon-minus"></span></a></th>
+        {% if user.is_authenticated and snack.trader == user %}
+        <th><a href="" class="content"><span class="glyphicon glyphicon-plus"></span></a></th>
         {% endif %}
         {% endif %}
       </tr>

@@ -28,7 +28,7 @@
         <th><p>{{ trade.state }}</p></th>
         <th><p><a href="{% url 'trader_list' fk=trade.trader %}">{{ trade.trader }}</a></p></th>
         {% if user.is_authenticated and user != trade.trader %}
-        <th><a href="{% url 'trade' fk=trade.trader %}" class="content"><span class="glyphicon glyphicon-plus"></span></a></th>
+        <th><a href="{% url 'trade' fk=trade.trader cu=user.username %}" class="content"><span class="glyphicon glyphicon-plus"></span></a></th>
         {% endif %}
         {% if user.is_authenticated and user = trade.trader %}
         <th><a href="" class="content"><span class="glyphicon glyphicon-minus"></span></a></th>

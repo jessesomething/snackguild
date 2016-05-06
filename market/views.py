@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 from django.contrib.auth.models import User
 from django.utils import timezone
 from .models import Market
@@ -14,10 +15,12 @@ def trade_detail(request, pk):
     trade = get_object_or_404(Market, pk=pk)
     return render(request, 'market/trade_detail.html', {'trade' : trade})
 
-def trade(request, fk):
+def trade(request, fk, cu):
     user = User.objects.get(username=fk)
-    traders = Market.objects.filter(trader=user)
-    return render(request, 'market/trade.html', {'traders' : traders})
+    current_user = User.objects.get(username=cu)
+    snacks = Market.objects.filter(Q(trader=current_user) | Q(trader=user))
+    return render(request, 'market/trade.html', {'snacks' : snacks})
+
 
 # def trader_list(request, uk):
 #     traders = get_object_or_404(Market, pk=uk)
@@ -25,6 +28,8 @@ def trade(request, fk):
 
 def trader_list(request, fk):
     user = User.objects.get(username=fk)
+    current_user = request.user
+    print(current_user)
     traders = Market.objects.filter(trader=user)
     return render(request, 'market/trader_list.html', {'traders' : traders})
 
