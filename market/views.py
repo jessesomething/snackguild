@@ -51,14 +51,15 @@ def trade_new(request):
     return render(request, 'market/trade_edit.html', {'form' : form})
 
 @login_required
-def update(request, id):
-    snack = Market.objects.get(pk=id)
+def update(request, snack_id):
+    snack = Market.objects.get(pk=snack_id)
     if snack.trading == False:
         snack.trading = True
+        snack.save()
     elif snack.trading == True:
         snack.trading = False
-    snack.save()
-    return HttpResponse('updated')
+        snack.save()
+    return render(request, 'market/trade.html', {'snack' : snack})
 
 @login_required
 def trade_save(request):

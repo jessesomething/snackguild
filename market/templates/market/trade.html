@@ -1,11 +1,20 @@
 {% extends 'market/base.html' %}
 
 {% block content %}
+<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script>
+            function trade_status(url, pk) {
+                $.get('update/'+pk+'/', function (data) {
+                    alert("counter updated!");
+                });
+            }
+        </script> -->
 <div class="col-md-6">
   <table class="table">
     <thead>
       <tr>
         <th>Snack</th>
+        <th>Snack_id</th>
         <th>Type</th>
       </tr>
     </thead>
@@ -13,12 +22,13 @@
     <tbody>
       <tr>
         {% if snack.trade_type = 'Trade' and user != snack.trader and snack.trading == False %}
-        <th><p>{{ snack.snack }}</p></h1></th>
+        <th><p>{{ snack.snack }}</p></th>
+        <th><p>{{ snack.id }}</th></p>
         <th><p>{{ snack.snack_type }}</p></th>
         <!-- Checks if currently logged in user is the displayed trader list -->
         {% endif %}
         {% if user.is_authenticated and user != snack.trader %}
-        <th><a href="" class="content"><span class="glyphicon glyphicon-plus"></span></a></th>
+        <th><a href="{% url 'update' snack_id=snack.id %}"><button id="snackButton" class="glyphicon glyphicon-plus" type="button"></button></a></th>
         {% endif %}
         {% endfor %}
       </tr>
@@ -37,13 +47,18 @@
     {% for snack in snacks %}
     <tbody>
       <tr>
-        {% if snack.trade_type = 'Trade' and user == snack.trader %}
+        {% if snack.trade_type = 'Trade' and user == snack.trader and snack.trading == False %}
         <th><p>{{ snack.snack }}</p></h1></th>
         <th><p>{{ snack.id }}</p></h1></th>
         <th><p>{{ snack.snack_type }}</p></th>
         <!-- Checks if currently logged in user is the displayed trader list -->
-        {% if user.is_authenticated and snack.trader == user %}
-        <th><a href="" class="content"><button id="{{ snack.id }}" class="glyphicon glyphicon-plus" class="{% url 'update' id=snack.id %}"></button></a></th>
+        {% if user.is_authenticated and user == snack.trader %}
+        <th><a href="{% url 'update' snack_id=snack.id %}"><button id="snackButton" class="glyphicon glyphicon-plus" type="button"></button></a></th>
+        <!-- <script>$("#snackButton").click(function() {
+    $.get("/output/", function(data) {
+        $("#myOutput").html(data);
+    }, "html");
+});</script> -->
         {% endif %}
         {% endif %}
       </tr>
@@ -68,7 +83,7 @@
         <!-- Checks if currently logged in user is the displayed trader list -->
         {% endif %}
         {% if user.is_authenticated and user != snack.trader %}
-        <th><a href="" class="content"><span class="glyphicon glyphicon-plus"></span></a></th>
+        <th><a href="{% url 'update' snack_id=snack.id %}"><button id="snackButton" class="glyphicon glyphicon-minus" type="button"></button></a></th>
         {% endif %}
         {% endfor %}
       </tr>
@@ -92,8 +107,8 @@
         <th><p>{{ snack.id }}</p></h1></th>
         <th><p>{{ snack.snack_type }}</p></th>
         <!-- Checks if currently logged in user is the displayed trader list -->
-        {% if user.is_authenticated and snack.trader == user %}
-        <th><a href="" class="content"><button id="{{ snack.id }}" class="glyphicon glyphicon-plus" class="update"></button></a></th>
+        {% if user.is_authenticated and snack.trader == user and snack.trading == True %}
+        <th><a href="{% url 'update' snack_id=snack.id %}"><button id="snackButton" class="glyphicon glyphicon-minus" type="button"></button></a></th>
         {% endif %}
         {% endif %}
       </tr>
