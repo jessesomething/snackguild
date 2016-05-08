@@ -10,3 +10,8 @@ class CartForm(forms.ModelForm):
     class Meta:
         model = Trade_Cart
         fields = ('trader','snack','snack_type','country','state')
+
+class TradeRequestForm(forms.ModelForm):
+    class meta:
+        model = Market
+        fields = ('snack', 'snack_type')

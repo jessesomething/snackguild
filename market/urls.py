@@ -11,5 +11,7 @@ urlpatterns = [
     url(r'^market/new/$', views.trade_new, name='trade_new'),
     url(r'^market/(?P<fk>\w+)/(?P<cu>\w+)/trade/$', views.trade, name='trade'),
     url(r'^market/(?P<snack_id>\w+)/trade/$', views.update, name='update'),
+    url(r'^market/trade_request/$', views.trade_request, name='trade_request'),
+    url(r'^market/(?P<pk>\d+)/$', views.request_detail, name='request_detail'),
     url(r'^accounts/login/$', 'django.contrib.auth.views.login'),
 ]
