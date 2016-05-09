@@ -31,7 +31,7 @@
         <th><a href="{% url 'trade' fk=trade.trader cu=user.username %}" class="content"><span class="glyphicon glyphicon-plus"></span></a></th>
         {% endif %}
         {% if user.is_authenticated and user = trade.trader %}
-        <th><a href="" class="content"><span class="glyphicon glyphicon-minus"></span></a></th>
+        <th><a href="{% url 'delete_item' pk=trade.pk %}" class="content"><span class="glyphicon glyphicon-minus"></span></a></th>
         {% endif %}
       </tr>
     </div>

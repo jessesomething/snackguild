@@ -48,6 +48,11 @@ def trade_new(request):
         form = TradeForm()
     return render(request, 'market/trade_edit.html', {'form' : form})
 
+def delete_item(request, pk):
+    snack = get_object_or_404(Market, pk=pk)
+    snack.delete()
+    return redirect('market.views.market_list')
+
 def request_detail(request, pk):
     trade = get_object_or_404(Market, pk=pk)
     return render(request, 'market/request_detail.html', {'trade' : trade})
