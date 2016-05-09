@@ -11,6 +11,7 @@ class Market(models.Model):
 
     STATE_CHOICES = (
     (None, 'Select State'),
+    ('NA', ''),
     ('AL', 'Alabama'),
     ('AK', 'Alaska'),
     ('AZ', 'Arizona'),
@@ -69,7 +70,7 @@ class Market(models.Model):
     snack = models.CharField(max_length=200)
     snack_type = models.CharField(max_length=200)
     country = fields.CountryField(default='US')
-    state = models.CharField(max_length=100, choices=STATE_CHOICES, default="NA")
+    state = models.CharField(max_length=100, choices=STATE_CHOICES, default="None")
     trader = models.ForeignKey('auth.User')
     trading = models.BooleanField(default=False)
 
