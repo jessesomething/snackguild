@@ -2,29 +2,19 @@
 
 
 <table class="table">
-
         <thead>
             <tr>
-                <th>Posted</th>
-                <th>Exchange Type</th>
                 <th>Snack</th>
                 <th>Type</th>
-                <th>Country</th>
-                <th>Trader</th>
             </tr>
         </thead>
 {% block content %}
-
 <tr>
     <div class="date">
         <th><p>{{ trade.post_date }}</p></th>
     </div>
-    <th><p>Want to {{ trade.trade_type }}</p></th>
     <th><p><a href="{% url 'request_detail' pk=trade.pk %}">{{ trade.snack }}</p></h1></th>
         <th><p>{{ trade.snack_type }}</p></th>
-        <th><p>{{ trade.country }}</p><th>
-        <th><p>{{ trade.state }}</p></th>
-        <th><p>{{ trade.trader }}</p></th>
     </tr>
 </div>
 </table>

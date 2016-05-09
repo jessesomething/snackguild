@@ -31,8 +31,6 @@ def trade_detail(request, pk):
 
 def trader_list(request, fk):
     user = User.objects.get(username=fk)
-    current_user = request.user
-    print(current_user)
     traders = Market.objects.filter(trader=user)
     return render(request, 'market/trader_list.html', {'traders' : traders})
 
@@ -56,18 +54,8 @@ def request_detail(request, pk):
 
 @login_required
 def trade_request(request):
-    # if request.method == "POST":
-    #     form = TradeRequestForm(request.POST)
-    #     if form.is_valid():
-    #         trade = form.save(commit=False)
-    #         trade.trader = request.user
-    #         trade.save()
-    #         return redirect('request_detail', pk=trade.pk)
-    # else:
-    #     form = TradeRequestForm()
-    # return render(request, 'market/request_detail.html', {'form' : form})
     if request.method == "POST":
-        form = TradeRequestForm(request.POST)
+        form = TradeForm(request.POST)
         if form.is_valid():
             trade = form.save(commit=False)
             trade.trader = request.user
@@ -75,7 +63,7 @@ def trade_request(request):
             trade.save()
             return redirect('request_detail', pk=trade.pk)
     else:
-        form = TradeRequestForm()
+        form = TradeForm()
     return render(request, 'market/trade_request.html', {'form' : form})
 
 @login_required
@@ -98,3 +86,14 @@ def update(request, snack_id):
         snack.trading = False
         snack.save()
     return render(request, 'market/trade.html', {'snack' : snack})
+
+@login_required
+def clear(request, pk, cu):
+    snacks = Market.objects.all()
+    for snack in snacks:
+        snack.trading = False
+        snack.save()
+    user = User.objects.get(username=fk)
+    current_user = User.objects.get(username=cu)
+    snacks = Market.objects.filter(Q(trader=current_user) | Q(trader=user))
+    return render(request, 'market/trade.html', {'snacks' : snacks})

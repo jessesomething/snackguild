@@ -24,7 +24,7 @@
         <th><p>Want to {{ trade.trade_type }}</p></th>
         <th><p><a href="{% url 'trade_detail' pk=trade.pk %}">{{ trade.snack }}</a></p></h1></th>
         <th><p>{{ trade.snack_type }}</p></th>
-        <th><p>{{ trade.country }}</p></th>
+        <th><p><img src={{ trade.country.flag }}></img> {{ trade.country }}</p></th>
         <th><p>{{ trade.state }}</p></th>
         <th><p><a href="{% url 'trader_list' fk=trade.trader %}">{{ trade.trader }}</a></p></th>
         {% if user.is_authenticated and user != trade.trader %}

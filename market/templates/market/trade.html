@@ -9,9 +9,11 @@
                 });
             }
         </script> -->
+<div class="row">
 <div class="col-md-6">
   <table class="table">
     <thead>
+      <p>Their items</p>
       <tr>
         <th>Snack</th>
         <th>Snack_id</th>
@@ -27,7 +29,7 @@
         <th><p>{{ snack.snack_type }}</p></th>
         <!-- Checks if currently logged in user is the displayed trader list -->
         {% endif %}
-        {% if user.is_authenticated and user != snack.trader %}
+        {% if user.is_authenticated and user != snack.trader and snack.trading == False %}
         <th><a href="{% url 'update' snack_id=snack.id %}"><button id="snackButton" class="glyphicon glyphicon-plus" type="button"></button></a></th>
         {% endif %}
         {% endfor %}
@@ -38,6 +40,7 @@
 <div class="col-md-6">
   <table class="table">
     <thead>
+      <p>Your items</p>
       <tr>
         <th>Snack</th>
         <th>Snack_id</th>
@@ -48,8 +51,8 @@
     <tbody>
       <tr>
         {% if snack.trade_type = 'Trade' and user == snack.trader and snack.trading == False %}
-        <th><p>{{ snack.snack }}</p></h1></th>
-        <th><p>{{ snack.id }}</p></h1></th>
+        <th><p>{{ snack.snack }}</p></th>
+        <th><p>{{ snack.id }}</p></th>
         <th><p>{{ snack.snack_type }}</p></th>
         <!-- Checks if currently logged in user is the displayed trader list -->
         {% if user.is_authenticated and user == snack.trader %}
@@ -66,9 +69,13 @@
     {% endfor %}
   </table>
 </div>
+</div>
+<div class="row">
 <div class="col-md-6">
   <table class="table">
     <thead>
+      <p>Their items trading:</p>
+      <p>
       <tr>
         <th>Snack</th>
         <th>Type</th>
@@ -78,11 +85,11 @@
     <tbody>
       <tr>
         {% if snack.trade_type = 'Trade' and user != snack.trader and snack.trading == True %}
-        <th><p>{{ snack.snack }}</p></h1></th>
+        <th><p>{{ snack.snack }}</p></th>
         <th><p>{{ snack.snack_type }}</p></th>
         <!-- Checks if currently logged in user is the displayed trader list -->
         {% endif %}
-        {% if user.is_authenticated and user != snack.trader %}
+        {% if user.is_authenticated and user != snack.trader and snack.trading == True %}
         <th><a href="{% url 'update' snack_id=snack.id %}"><button id="snackButton" class="glyphicon glyphicon-minus" type="button"></button></a></th>
         {% endif %}
         {% endfor %}
@@ -93,6 +100,7 @@
 <div class="col-md-6">
   <table class="table">
     <thead>
+      <p>Your items trading:</p>
       <tr>
         <th>Snack</th>
         <th>Snack_id</th>
@@ -103,8 +111,8 @@
     <tbody>
       <tr>
         {% if snack.trade_type = 'Trade' and user == snack.trader and snack.trading == True %}
-        <th><p>{{ snack.snack }}</p></h1></th>
-        <th><p>{{ snack.id }}</p></h1></th>
+        <th><p>{{ snack.snack }}</p></th>
+        <th><p>{{ snack.id }}</p></th>
         <th><p>{{ snack.snack_type }}</p></th>
         <!-- Checks if currently logged in user is the displayed trader list -->
         {% if user.is_authenticated and snack.trader == user and snack.trading == True %}
@@ -116,5 +124,11 @@
     {% endfor %}
   </table>
 </div>
+</div>
+{% for snack in snacks %}
+{% if forloop.first %}
 <a href="{% url 'trade_request' %}"><button id="submit" type="button">Submit Request</button></a>
+<a href="{% url 'clear' pk=snack.trader cu=user.username %}"><button id="submit" type="button">Clear Request</button></a>
+    {%endif%}
+    {%endfor%}
 {% endblock %}

@@ -6,6 +6,11 @@ body {
     padding-left: 20px;
 }
 
+.snack-form {
+  margin-right: 160;
+  width: auto;
+}
+
 .page-header {
     background-color: #209FC9;
     margin-top: 0;
