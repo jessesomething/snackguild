@@ -1,5 +1,9 @@
 Thanks for visiting Snack Alley!
 
+A website for trading snacks and socializing with those who also love snacks!
+
+Created by: Jesse Spalding
+
 
 REQUIREMENTS:
 
@@ -10,6 +14,7 @@ INSTALLATION:
 1. Open up the project folder in command prompt. Create a virtual environment.
 2. If you don't have pip installed do so through the command prompt
 3. Install django-countries into your virtual environment by using 'pip install django-countries'
+4. Run your virtual environment and make the appropriate database migrations by typing 'python manage.py makemigrations' and 'python manage.py migrate'
 4. Run the server by typing 'python manage.py runserver'
 5. Head to http://127.0.0.1:8000/ for the home page and go from there!
 
