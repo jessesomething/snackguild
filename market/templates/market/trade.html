@@ -57,6 +57,7 @@
         <!-- Checks if currently logged in user is the displayed trader list -->
         {% if user.is_authenticated and user == snack.trader %}
         <th><a href="{% url 'update' snack_id=snack.id %}"><button id="snackButton" class="glyphicon glyphicon-plus" type="button"></button></a></th>
+<!-- ajax fail here -->
         <!-- <script>$("#snackButton").click(function() {
     $.get("/output/", function(data) {
         $("#myOutput").html(data);
@@ -128,7 +129,7 @@
 {% for snack in snacks %}
 {% if forloop.first %}
 <a href="{% url 'trade_request' %}"><button id="submit" type="button">Submit Request</button></a>
-<a href="{% url 'clear' pk=snack.trader cu=user.username %}"><button id="submit" type="button">Clear Request</button></a>
+<th><a href="{% url 'clear' %}"><button id="snackButton" type="button">Clear Request</button></a></th>
     {%endif%}
     {%endfor%}
 {% endblock %}

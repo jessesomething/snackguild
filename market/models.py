@@ -1,4 +1,5 @@
 from django.db import models
+from django import forms
 from django.utils import timezone
 from django_countries import fields
 
@@ -70,9 +71,11 @@ class Market(models.Model):
     snack = models.CharField(max_length=200)
     snack_type = models.CharField(max_length=200)
     country = fields.CountryField(default='US')
-    state = models.CharField(max_length=100, choices=STATE_CHOICES, default="None")
+    state = models.CharField(max_length=100, choices=STATE_CHOICES, default="NA")
     trader = models.ForeignKey('auth.User')
     trading = models.BooleanField(default=False)
+    # thumbnail = models.ImageField(upload_to='market', null=True, blank=True, default="")
+
 
     def post(self):
         self.post_date = timezone.now()

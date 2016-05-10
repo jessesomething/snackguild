@@ -93,12 +93,9 @@ def update(request, snack_id):
     return render(request, 'market/trade.html', {'snack' : snack})
 
 @login_required
-def clear(request, pk, cu):
+def clear(request):
     snacks = Market.objects.all()
     for snack in snacks:
         snack.trading = False
         snack.save()
-    user = User.objects.get(username=fk)
-    current_user = User.objects.get(username=cu)
-    snacks = Market.objects.filter(Q(trader=current_user) | Q(trader=user))
     return render(request, 'market/trade.html', {'snacks' : snacks})
