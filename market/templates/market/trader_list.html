@@ -6,8 +6,10 @@
     {% for trader in traders %}
     {% if forloop.first %}
         <h1><p>{{trader.trader}}</p></h1>
-        <h2><p><img src={{ trader.country.flag }}></img> {{trader.country}}</p></h2>
+        <h2><p><img src={{ trader.country.flag }}></img> {{trader.country.name}}</p></h2>
+        {% if trader.state != 'NA' and trader.state != "" %}
         <h2><p>{{trader.state}}</p></h2>
+        {% endif %}
         <p><button><a href="{% url 'trade' fk=trader.trader cu=user.username %}">Trade with {{trader.trader}}</a></button></p>
         {%endif%}
         {%endfor%}
@@ -35,8 +37,11 @@
         <th><p>{{ trader.snack }}</p></h1></th>
         <th><p>{{ trader.snack_type }}</p></th>
         <!-- Checks if currently logged in user is the displayed trader list -->
-        {% if user.is_authenticated and trader.trader == user.username %}
-        <th><a href="" class="content"><span class="glyphicon glyphicon-minus"></span></a></th>
+        {% if user.is_authenticated and user == trader.trader %}
+        <th><a href="{% url 'delete_item' pk=trader.pk %}" class="content"><span class="glyphicon glyphicon-minus"></span></a></th>
+        {% endif %}
+        {% if user.is_authenticated and user != trader.trader %}
+        <th><a href="{% url 'trade' fk=trader.trader cu=user.username %}" class="content"><span class="glyphicon glyphicon-plus"></span></a></th>
         {% endif %}
       </tr>
     </tbody>
